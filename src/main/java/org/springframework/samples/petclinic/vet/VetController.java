@@ -17,6 +17,8 @@ package org.springframework.samples.petclinic.vet;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +37,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 class VetController {
 
+	private static final Logger logger = LoggerFactory.getLogger(VetController.class);
+
 	private final VetRepository vetRepository;
 
 	public VetController(VetRepository vetRepository) {
@@ -43,6 +47,7 @@ class VetController {
 
 	@GetMapping("/vets.html")
 	public String showVetList(@RequestParam(defaultValue = "1") int page, Model model) {
+		logger.info("Showing vet list page {}", page);
 		Page<Vet> paginated = findPaginated(page);
 		return addPaginationModel(page, paginated, model);
 	}
