@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: workload
-          image: tkeesling/harness_se_lab_petclinic:latest
+          image: {{.Values.image}}
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: postgres
